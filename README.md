@@ -13,1251 +13,1163 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
-    overflow-x: hidden;
     font-family: Georgia, "Times New Roman", serif;
-    color: #fffaf5;
+    color: #fffaf7;
+    overflow-x: hidden;
     background:
+        radial-gradient(circle at 50% 8%, rgba(255,226,184,.55), transparent 22%),
         linear-gradient(
             180deg,
-            #28375f 0%,
-            #526a91 22%,
-            #8298b5 42%,
-            #b99caf 62%,
-            #d8aa9a 78%,
-            #ead0a9 100%
+            #536f9d 0%,
+            #7088ad 20%,
+            #9ba4bf 38%,
+            #c09eac 55%,
+            #d9aa9e 72%,
+            #e8c39f 88%,
+            #f1d8b2 100%
         );
 }
-/* =====================================================
-   BACKGROUND SKY
-===================================================== */
+/* =========================
+   BACKGROUND
+========================= */
 .sky {
     position: fixed;
     inset: 0;
-    overflow: hidden;
+    z-index: -10;
     pointer-events: none;
-    z-index: 0;
+    overflow: hidden;
 }
 .sun {
     position: absolute;
-    width: 190px;
-    height: 190px;
-    left: 50%;
-    top: 68%;
-    transform: translate(-50%, -50%);
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
-    background: #f9dfb2;
+    background: #ffe5b8;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
     box-shadow:
-        0 0 35px rgba(249,223,178,.7),
-        0 0 90px rgba(229,183,154,.45);
-    opacity: .7;
+        0 0 35px rgba(255,225,174,.7),
+        0 0 100px rgba(255,205,160,.35);
+}
+.sun::after {
+    content: "";
+    position: absolute;
+    inset: -35px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,230,185,.25), transparent 65%);
 }
 .moon {
     position: absolute;
     width: 75px;
     height: 75px;
-    right: 13%;
-    top: 9%;
+    right: 9%;
+    top: 14%;
     border-radius: 50%;
-    background: #f8f2df;
-    box-shadow:
-        0 0 25px rgba(248,242,223,.65),
-        0 0 55px rgba(248,242,223,.25);
+    background: #fff6df;
+    box-shadow: 0 0 25px rgba(255,247,225,.45);
+    opacity: .75;
 }
-/* =====================================================
-   STARS
-===================================================== */
+.moon::after {
+    content: "";
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    background: #7385aa;
+    border-radius: 50%;
+    left: 22px;
+    top: -10px;
+}
 .star {
     position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: #fffaf2;
-    box-shadow:
-        0 0 6px rgba(255,250,242,.8);
-    animation:
-        twinkle 3s infinite alternate;
+    color: rgba(255,255,255,.8);
+    animation: twinkle 3s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(255,255,255,.45);
 }
 @keyframes twinkle {
-    from {
-        opacity: .3;
-        transform: scale(.7);
-    }
-    to {
-        opacity: .85;
-        transform: scale(1.3);
-    }
+    0%,100% { opacity: .3; transform: scale(.8); }
+    50% { opacity: 1; transform: scale(1.2); }
 }
-/* =====================================================
-   FLOATING ELEMENTS
-===================================================== */
+.s1 { left: 8%; top: 13%; animation-delay: .3s; }
+.s2 { left: 19%; top: 29%; animation-delay: 1s; }
+.s3 { right: 23%; top: 27%; animation-delay: 1.8s; }
+.s4 { right: 7%; top: 38%; animation-delay: .7s; }
+.s5 { left: 42%; top: 22%; animation-delay: 2.2s; }
+.s6 { left: 5%; top: 47%; animation-delay: 1.3s; }
+.s7 { right: 39%; top: 45%; animation-delay: .4s; }
 .floating {
     position: fixed;
-    bottom: -50px;
+    bottom: -40px;
     pointer-events: none;
-    z-index: 20;
-    animation:
-        floatUp linear forwards;
+    opacity: .45;
+    animation: floatUp linear forwards;
+    z-index: 0;
 }
 @keyframes floatUp {
-    0% {
-        transform:
-            translateY(0)
-            rotate(0deg);
+    from {
+        transform: translateY(0) rotate(0deg);
         opacity: 0;
     }
-    12% {
-        opacity: .9;
-    }
-    100% {
-        transform:
-            translateY(-115vh)
-            rotate(280deg);
+    15% { opacity: .5; }
+    to {
+        transform: translateY(-115vh) rotate(360deg);
         opacity: 0;
     }
 }
-/* =====================================================
-   MAIN
-===================================================== */
-main {
-    position: relative;
-    z-index: 2;
-    padding:
-        60px
-        16px
-        100px;
-    text-align: center;
+/* =========================
+   LAYOUT
+========================= */
+.container {
+    width: min(920px, 92%);
+    margin: auto;
 }
-/* =====================================================
-   INTRO
-===================================================== */
-.intro {
-    min-height: 82vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+section {
+    padding: 55px 0;
 }
-.eyebrow {
-    margin-bottom: 15px;
-    font-size: 13px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: #f8eee6;
-    opacity: .85;
+.card {
+    background: rgba(255,248,244,.22);
+    border: 1px solid rgba(255,255,255,.38);
+    border-radius: 30px;
+    padding: 30px;
+    margin: 25px 0;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 15px 45px rgba(78,66,92,.12);
+}
+h1,
+h2,
+h3 {
+    margin-top: 0;
 }
 h1 {
-    margin: 0;
-    font-size:
-        clamp(48px, 12vw, 100px);
-    line-height: .9;
-    color: #fff8f0;
-    text-shadow:
-        0 4px 18px rgba(42,54,82,.2);
-    animation:
-        titleAppear 1.5s ease;
+    font-size: clamp(3rem, 10vw, 6rem);
+    line-height: .95;
+    margin-bottom: 18px;
+    text-shadow: 0 5px 25px rgba(88,69,91,.2);
 }
-.name {
-    display: block;
-    color: #dcecf2;
-    font-style: italic;
-    text-shadow:
-        0 0 16px rgba(220,236,242,.4);
+h2 {
+    font-size: clamp(2rem, 6vw, 3.2rem);
 }
-.intro-text {
-    max-width: 680px;
-    margin:
-        30px
-        auto
-        0;
-    font-size:
-        clamp(18px,4vw,24px);
-    line-height: 1.7;
-    color: #fff9f3;
-    opacity: 0;
-    animation:
-        fadeIn 2s ease .6s forwards;
+h3 {
+    font-size: 1.45rem;
 }
-.scroll {
-    margin-top: 45px;
-    font-size: 12px;
+p {
+    font-size: 1.08rem;
+    line-height: 1.8;
+}
+/* =========================
+   HERO
+========================= */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 50px 0;
+}
+.hero-content {
+    width: 100%;
+}
+.eyebrow {
     letter-spacing: 3px;
-    opacity: .7;
-    animation:
-        bounce 2s infinite;
+    text-transform: uppercase;
+    font-size: .8rem;
+    opacity: .8;
 }
-@keyframes titleAppear {
-    from {
-        opacity: 0;
-        transform:
-            translateY(25px)
-            scale(.94);
-    }
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
+.hero-subtitle {
+    font-size: 1.35rem;
+    max-width: 650px;
+    margin: 25px auto;
+}
+.music-button {
+    margin-top: 22px;
+    font-size: 1.05rem;
+    padding: 15px 25px;
+    border-radius: 999px;
+}
+/* =========================
+   BUTTONS
+========================= */
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: #4d4960;
+    background: linear-gradient(135deg, #dcecff, #f5d8df, #ffe2bd);
+    padding: 14px 20px;
+    border-radius: 18px;
+    font-size: 1rem;
+    transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    box-shadow: 0 8px 20px rgba(74,66,91,.13);
+}
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(74,66,91,.18);
+}
+button:active {
+    transform: scale(.96);
+}
+button:disabled {
+    opacity: .5;
+    cursor: default;
+    transform: none;
+}
+.primary {
+    background: linear-gradient(135deg, #cce7f5, #d9d5ed, #f3ccd2);
+}
+.small-note {
+    font-size: .9rem;
+    opacity: .75;
+}
+/* =========================
+   LOVE LETTER
+========================= */
+.letter {
+    max-width: 760px;
+    margin: auto;
+}
+.letter p {
+    font-size: 1.13rem;
+}
+/* =========================
+   PROGRESS
+========================= */
+.progress-wrap {
+    margin: 20px 0 35px;
+}
+.progress-text {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: .95rem;
+}
+.progress-bar {
+    height: 13px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.25);
+    overflow: hidden;
+}
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #c9e8f5, #d9d5ec, #f4ced0, #f5d6ad);
+    transition: width .7s ease;
+}
+/* =========================
+   GAME CARDS
+========================= */
+.game {
+    position: relative;
+    overflow: hidden;
+}
+.game-number {
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.25);
+    font-size: .8rem;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+.game-complete {
+    display: none;
+    margin-top: 15px;
+    font-size: 1rem;
+}
+.game-complete.show {
+    display: block;
+}
+/* =========================
+   GAME 1: PRESENTS
+========================= */
+.present-area {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+.present {
+    font-size: 3.6rem;
+    padding: 22px;
+    min-width: 120px;
+    background: rgba(255,255,255,.24);
+}
+.present.opened {
+    animation: presentOpen .5s ease;
+}
+@keyframes presentOpen {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25) rotate(-7deg); }
+    100% { transform: scale(1); }
+}
+.present-message {
+    min-height: 55px;
+    margin-top: 25px;
+    font-size: 1.15rem;
+}
+/* =========================
+   GAME 2: CAKE
+========================= */
+.cake {
+    width: 220px;
+    margin: 35px auto 20px;
+    text-align: center;
+    position: relative;
+}
+.cake-top {
+    height: 65px;
+    border-radius: 18px 18px 10px 10px;
+    background: linear-gradient(#f8d9d9, #e9b8bf);
+    position: relative;
+}
+.cake-bottom {
+    height: 85px;
+    border-radius: 10px 10px 25px 25px;
+    background: linear-gradient(#f1c8c1, #dca7a8);
+    margin-top: 6px;
+}
+.candle-row {
+    position: absolute;
+    top: -62px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.candle {
+    width: 14px;
+    height: 50px;
+    background: linear-gradient(#d9e9f7, #b7cde4);
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+.flame {
+    position: absolute;
+    width: 18px;
+    height: 25px;
+    background: #ffe4a9;
+    border-radius: 50% 50% 50% 10%;
+    transform: rotate(45deg);
+    left: -2px;
+    top: -23px;
+    box-shadow: 0 0 15px #ffe4a9;
+    transition: opacity .3s;
+}
+.flame.out {
+    opacity: 0;
+}
+.cake-message {
+    text-align: center;
+    min-height: 30px;
+}
+/* =========================
+   GAME 3: STARS
+========================= */
+.star-game {
+    position: relative;
+    height: 330px;
+    border-radius: 25px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.2), transparent 12%),
+        linear-gradient(160deg, rgba(51,72,108,.55), rgba(111,102,138,.45), rgba(191,145,157,.5));
+    border: 1px solid rgba(255,255,255,.25);
+}
+.catch-star {
+    position: absolute;
+    font-size: 2rem;
+    padding: 7px;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: 0 0 15px rgba(255,255,255,.8);
+}
+.catch-star:hover {
+    box-shadow: none;
+    transform: scale(1.25);
+}
+.star-score {
+    text-align: center;
+    margin: 18px 0;
+    font-size: 1.15rem;
+}
+/* =========================
+   GAME 4: QUIZ
+========================= */
+.quiz-question {
+    display: none;
+}
+.quiz-question.active {
+    display: block;
+    animation: fadeIn .35s ease;
 }
 @keyframes fadeIn {
     from {
         opacity: 0;
+        transform: translateY(8px);
     }
     to {
         opacity: 1;
-    }
-}
-@keyframes bounce {
-    0%,100% {
         transform: translateY(0);
     }
-    50% {
-        transform: translateY(9px);
-    }
 }
-/* =====================================================
-   GLASS CARDS
-===================================================== */
-.card {
-    width:
-        min(94vw, 760px);
-    margin:
-        45px
-        auto;
-    padding:
-        38px
-        24px;
-    border-radius: 30px;
-    background:
-        rgba(245,247,249,.17);
-    border:
-        1px solid
-        rgba(255,250,245,.32);
-    backdrop-filter:
-        blur(15px);
-    box-shadow:
-        0 20px 50px
-        rgba(50,55,80,.14);
-}
-.card h2 {
-    margin-top: 0;
-    font-size:
-        clamp(28px,6vw,40px);
-    color: #e8f3f5;
-    text-shadow:
-        0 2px 10px rgba(45,55,80,.15);
-}
-.card p {
-    font-size: 18px;
-    line-height: 1.85;
-    color: #fffaf6;
-}
-/* =====================================================
-   BIRTHDAY GAMES
-===================================================== */
-.game-intro {
-    margin-bottom: 30px;
-}
-.game {
-    margin:
-        28px
-        0;
-    padding:
-        27px
-        18px;
-    border-radius: 24px;
-    background:
-        rgba(244,245,248,.13);
-    border:
-        1px solid
-        rgba(255,250,245,.22);
-}
-.game h3 {
-    margin-top: 0;
-    font-size: 25px;
-    color: #f7eee4;
-}
-.game p {
-    font-size: 16px;
-}
-/* =====================================================
-   BUTTONS
-===================================================== */
-button {
-    min-height: 44px;
-    border: none;
-    padding:
-        12px
-        20px;
-    margin: 6px;
-    border-radius: 50px;
-    background:
-        #f3e8d7;
-    color:
-        #43516f;
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow:
-        0 5px 16px
-        rgba(50,55,80,.14);
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-}
-button:hover {
-    transform:
-        translateY(-3px);
-    box-shadow:
-        0 8px 22px
-        rgba(50,55,80,.2);
-}
-button:active {
-    transform:
-        scale(.96);
-}
-/* =====================================================
-   PRESENT GAME
-===================================================== */
-.presents {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 20px;
-}
-.present {
-    font-size: 52px;
-    background: transparent;
-    box-shadow: none;
-    padding: 8px;
-}
-.present:hover {
-    background: transparent;
-    box-shadow: none;
-    transform:
-        translateY(-7px)
-        rotate(-4deg)
-        scale(1.08);
-}
-/* =====================================================
-   CANDLE GAME
-===================================================== */
-.cake {
-    margin: 15px 0;
-    font-size: 75px;
-    cursor: pointer;
-    transition:
-        transform .25s ease;
-}
-.cake:hover {
-    transform:
-        scale(1.08);
-}
-.candle-count {
-    font-size: 16px;
-    opacity: .85;
-}
-/* =====================================================
-   STAR GAME
-===================================================== */
-.star-game {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-}
-.game-star {
-    min-width: 44px;
-    font-size: 27px;
-    padding: 8px;
-    background: transparent;
-    color: white;
-    box-shadow: none;
-}
-.game-star:hover {
-    background: transparent;
-    box-shadow: none;
-    transform:
-        scale(1.2);
-}
-.game-star.collected {
-    opacity: .25;
-    transform:
-        scale(.7);
-}
-/* =====================================================
-   QUIZ
-===================================================== */
 .quiz-options {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
 }
-.quiz-options button {
-    max-width: 250px;
+.quiz-option {
+    width: 100%;
+    text-align: left;
+    background: rgba(255,255,255,.27);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.28);
 }
-/* =====================================================
-   OCEAN GAME
-===================================================== */
+.quiz-option.correct {
+    background: rgba(183,225,208,.65);
+    color: #394f49;
+}
+.quiz-option.wrong {
+    background: rgba(239,186,190,.65);
+    color: #5d4146;
+}
+.quiz-feedback {
+    min-height: 35px;
+    margin-top: 18px;
+}
+.quiz-next {
+    margin-top: 10px;
+}
+.quiz-score {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: 20px;
+}
+/* =========================
+   GAME 5: OTTER OCEAN
+========================= */
 .ocean {
     position: relative;
-    height: 220px;
+    height: 300px;
+    border-radius: 28px;
     overflow: hidden;
-    border-radius: 24px;
-    margin-top: 20px;
     background:
         linear-gradient(
             180deg,
-            #9bbbc5,
-            #7298aa,
-            #587f94
+            rgba(177,218,231,.8),
+            rgba(113,171,194,.8),
+            rgba(75,132,159,.9)
         );
+    border: 1px solid rgba(255,255,255,.3);
 }
 .wave {
     position: absolute;
-    left: -10%;
-    width: 120%;
-    height: 40px;
-    border-radius: 50%;
-    background:
-        rgba(236,247,245,.25);
-    animation:
-        waveMove 5s ease-in-out infinite alternate;
-}
-.wave.one {
-    top: 45px;
+    width: 150%;
+    height: 80px;
+    left: -25%;
+    bottom: -30px;
+    border-radius: 50% 50% 0 0;
+    background: rgba(220,243,247,.25);
+    animation: waveMove 5s ease-in-out infinite;
 }
 .wave.two {
-    top: 105px;
-    animation-delay: 1s;
-}
-.wave.three {
-    top: 165px;
-    animation-delay: 2s;
+    bottom: 5px;
+    animation-delay: -2s;
+    opacity: .55;
 }
 @keyframes waveMove {
-    from {
-        transform:
-            translateX(-20px);
-    }
-    to {
-        transform:
-            translateX(20px);
-    }
+    0%,100% { transform: translateX(-3%); }
+    50% { transform: translateX(3%); }
 }
 .otter {
     position: absolute;
-    font-size: 42px;
-    cursor: pointer;
-    transition:
-        transform .3s ease;
+    font-size: 3rem;
+    padding: 8px;
+    background: transparent;
+    box-shadow: none;
+    transition: left .5s ease, top .5s ease, transform .3s ease;
 }
 .otter:hover {
-    transform:
-        scale(1.2);
+    box-shadow: none;
+    transform: scale(1.2) rotate(-5deg);
 }
-/* =====================================================
-   PEONY GAME
-===================================================== */
-.flowers {
+.ocean-message {
+    min-height: 35px;
+    text-align: center;
+    margin-top: 18px;
+}
+/* =========================
+   GAME 6: FLOWERS
+========================= */
+.flower-garden {
     display: grid;
-    grid-template-columns:
-        repeat(3, 1fr);
-    gap: 12px;
-    max-width: 400px;
-    margin:
-        20px
-        auto;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 25px;
 }
 .flower {
-    min-height: 80px;
-    font-size: 34px;
-    padding: 10px;
-    background:
-        rgba(255,255,255,.12);
-    border:
-        1px solid
-        rgba(255,255,255,.18);
-    border-radius: 20px;
-    box-shadow: none;
+    min-height: 100px;
+    font-size: 2.6rem;
+    background: rgba(255,255,255,.2);
 }
-.flower.open {
-    background:
-        rgba(255,255,255,.24);
-    transform:
-        rotate(3deg);
+.flower-text {
+    text-align: center;
+    min-height: 60px;
+    margin-top: 20px;
 }
-/* =====================================================
-   SECRET MESSAGE
-===================================================== */
-.secret {
-    display: none;
-    margin-top: 25px;
-    padding: 22px;
-    border-radius: 22px;
-    background:
-        rgba(255,255,255,.13);
-    line-height: 1.8;
-    font-size: 18px;
-}
-.secret.show {
-    display: block;
-    animation:
-        fadeIn .8s ease;
-}
-/* =====================================================
-   MUSIC
-===================================================== */
-.music-status {
-    min-height: 30px;
-    margin-top: 12px;
-    font-size: 15px;
-    opacity: .85;
-}
-/* =====================================================
-   PROGRESS
-===================================================== */
-.progress {
-    height: 10px;
-    width: min(90%, 500px);
-    margin:
-        25px
-        auto;
-    border-radius: 20px;
-    overflow: hidden;
-    background:
-        rgba(255,255,255,.18);
-}
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    border-radius: 20px;
-    background:
-        #e8ded0;
-    transition:
-        width .5s ease;
-}
-/* =====================================================
+/* =========================
    FINAL
-===================================================== */
+========================= */
 .final {
-    min-height: 55vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    padding: 100px 0 120px;
 }
-.final-heart {
-    font-size: 65px;
-    animation:
-        heartbeat 1.6s infinite;
+.secret-button {
+    font-size: 1.15rem;
+    padding: 18px 28px;
 }
-@keyframes heartbeat {
-    0%,100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.13);
-    }
+.secret-letter {
+    display: none;
+    margin-top: 30px;
+    animation: fadeIn .8s ease;
+}
+.secret-letter.show {
+    display: block;
 }
 .signature {
-    margin-top: 25px;
-    font-size: 22px;
-    font-style: italic;
-    color: #e8f3f5;
+    font-size: 1.4rem;
+    margin-top: 30px;
 }
-/* =====================================================
+/* =========================
    CONFETTI
-===================================================== */
+========================= */
 .confetti {
     position: fixed;
-    top: -20px;
-    z-index: 100;
+    top: -30px;
+    z-index: 50;
     pointer-events: none;
-    animation:
-        confettiFall 3.5s linear forwards;
+    animation: confettiFall 4s linear forwards;
 }
 @keyframes confettiFall {
-    0% {
-        transform:
-            translateY(0)
-            rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform:
-            translateY(110vh)
-            rotate(650deg);
+    to {
+        transform: translateY(115vh) rotate(720deg);
         opacity: 0;
     }
 }
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
-@media (max-width: 600px) {
-    main {
-        padding:
-            40px
-            12px
-            80px;
+========================= */
+@media (max-width: 650px) {
+    section {
+        padding: 40px 0;
     }
     .card {
-        padding:
-            30px
-            18px;
-    }
-    .card p {
-        font-size: 17px;
+        padding: 22px;
+        border-radius: 24px;
     }
     .sun {
-        width: 150px;
-        height: 150px;
+        width: 125px;
+        height: 125px;
     }
-    .moon {
-        width: 60px;
-        height: 60px;
+    .flower-garden {
+        grid-template-columns: repeat(2, 1fr);
     }
-    .flowers {
-        gap: 8px;
+    .present {
+        min-width: 95px;
+        font-size: 2.8rem;
+        padding: 17px;
+    }
+    .star-game {
+        height: 290px;
+    }
+    .ocean {
+        height: 270px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
     }
 }
 </style>
 </head>
 <body>
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
 <div class="sky">
     <div class="sun"></div>
     <div class="moon"></div>
-    <div class="star" style="left:7%;top:8%;animation-delay:.3s"></div>
-    <div class="star" style="left:16%;top:17%;animation-delay:1.1s"></div>
-    <div class="star" style="left:27%;top:7%;animation-delay:.7s"></div>
-    <div class="star" style="left:39%;top:15%;animation-delay:1.5s"></div>
-    <div class="star" style="left:51%;top:6%;animation-delay:.4s"></div>
-    <div class="star" style="left:64%;top:18%;animation-delay:1.2s"></div>
-    <div class="star" style="left:77%;top:6%;animation-delay:.8s"></div>
-    <div class="star" style="left:90%;top:21%;animation-delay:1.6s"></div>
-    <div class="star" style="left:11%;top:31%;animation-delay:.5s"></div>
-    <div class="star" style="left:24%;top:25%;animation-delay:1.4s"></div>
-    <div class="star" style="left:47%;top:30%;animation-delay:.9s"></div>
-    <div class="star" style="left:60%;top:27%;animation-delay:1.7s"></div>
-    <div class="star" style="left:73%;top:34%;animation-delay:.6s"></div>
-    <div class="star" style="left:87%;top:29%;animation-delay:1s"></div>
+    <span class="star s1">✦</span>
+    <span class="star s2">✧</span>
+    <span class="star s3">✦</span>
+    <span class="star s4">⋆</span>
+    <span class="star s5">✧</span>
+    <span class="star s6">✦</span>
+    <span class="star s7">⋆</span>
 </div>
-<main>
-<!-- =====================================================
-     INTRO
-===================================================== -->
-<section class="intro">
-    <div class="eyebrow">
-        A tiny universe made just for you
-    </div>
-    <h1>
-        Happy Birthday
-        <span class="name">Lola</span>
-    </h1>
-    <p class="intro-text">
-        Today the sky feels a little softer,
-        the stars feel a little brighter,
-        and the universe has one very important
-        reason to celebrate.
-        <br><br>
-        You. 💙
-    </p>
-    <div class="scroll">
-        ↓ YOUR BIRTHDAY ADVENTURE STARTS HERE ↓
+<main class="container">
+<!-- =========================
+     HERO
+========================= -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">
+            A little birthday universe
+        </div>
+        <h1>
+            Happy Birthday<br>
+            Lola 💙
+        </h1>
+        <p class="hero-subtitle">
+            Today the sky feels a little softer,
+            the stars feel a little brighter,
+            and the universe has one very important
+            reason to celebrate.
+            <br><br>
+            <strong>You.</strong> 🌅
+        </p>
+        <!-- MUSIC BUTTON IS NOW AT THE TOP -->
+        <button class="music-button primary" id="musicButton">
+            🎵 Play Happy Birthday
+        </button>
+        <p class="small-note">
+            Tap the button when you're ready for your birthday song.
+        </p>
+        <br>
+        <button id="beginButton">
+            🎁 Begin Your Birthday Adventure
+        </button>
     </div>
 </section>
-<!-- =====================================================
+<!-- =========================
      LOVE LETTER
-===================================================== -->
-<section class="card">
-    <h2>For my Lola 💙</h2>
-    <p>
-        Happy 27th birthday to the girl who became
-        one of the most beautiful parts of my world.
-        <br><br>
-        If I could give you anything today,
-        I would give you every sunset,
-        every peaceful night,
-        every beautiful ocean,
-        and every star in the sky.
-        <br><br>
-        Since I cannot exactly wrap up the universe
-        and put it in a birthday box...
-        I made you this little universe instead.
-        <br><br>
-        Every little thing here is a reminder
-        that you are loved.
-    </p>
-</section>
-<!-- =====================================================
-     BIRTHDAY GAMES
-===================================================== -->
-<section class="card">
-    <h2>🎮 Lola's Birthday Games</h2>
-    <p class="game-intro">
-        Your birthday mission has begun.
-        Play the games below and unlock
-        the final birthday surprise.
-    </p>
-    <div class="progress">
-        <div
-            id="progressBar"
-            class="progress-bar">
+========================= -->
+<section>
+    <div class="card letter">
+        <div class="eyebrow">
+            From Bree / Putiputi
         </div>
-    </div>
-    <p id="progressText">
-        0 / 6 birthday games completed
-    </p>
-    <!-- GAME 1 -->
-    <div class="game">
-        <h3>🎁 Game One — Pick a Present</h3>
+        <h2>
+            For my Lola 💙
+        </h2>
         <p>
-            One of these presents contains
-            a birthday message from Bree.
+            If I could give you anything for your birthday,
+            I would give you a sky full of sunsets,
+            a peaceful ocean,
+            every star in the universe,
+            and every quiet moment that makes you feel safe.
         </p>
-        <div class="presents">
-            <button
-                class="present"
-                data-message="You deserve every beautiful thing this world has to offer. 💙">
-                🎁
-            </button>
-            <button
-                class="present"
-                data-message="If I could wrap up a sunset and give it to you, I would. 🌅">
-                🎁
-            </button>
-            <button
-                class="present"
-                data-message="You are my favourite person in this enormous universe. ⭐">
-                🎁
-            </button>
-        </div>
-        <div
-            id="presentResult"
-            class="game-result">
-        </div>
-    </div>
-    <!-- GAME 2 -->
-    <div class="game">
-        <h3>🎂 Game Two — Birthday Candles</h3>
         <p>
-            Tap the cake to blow out the candles.
+            Since I cannot put the whole universe inside a birthday box,
+            I made you a tiny piece of one instead.
         </p>
-        <div
-            id="cake"
-            class="cake"
-            role="button"
-            tabindex="0">
-            🕯️🕯️🕯️
-        </div>
-        <div
-            id="candleResult"
-            class="game-result">
-            3 candles are still glowing.
-        </div>
-    </div>
-    <!-- GAME 3 -->
-    <div class="game">
-        <h3>⭐ Game Three — Catch the Stars</h3>
         <p>
-            Catch all five stars to make
-            Lola's birthday wish.
+            So this little world is yours.
+            Explore it, play the games,
+            find the surprises,
+            and most importantly...
+            remember how incredibly loved you are.
         </p>
-        <div
-            id="starGame"
-            class="star-game">
-        </div>
-        <div
-            id="starResult"
-            class="game-result">
-            0 / 5 stars collected
-        </div>
-    </div>
-    <!-- GAME 4 -->
-    <div class="game">
-        <h3>💙 Game Four — How Well Do You Know Lola?</h3>
-        <p id="quizQuestion">
-            What colour does Lola love?
-        </p>
-        <div
-            id="quizOptions"
-            class="quiz-options">
-            <button data-answer="wrong">
-                Burgundy
-            </button>
-            <button data-answer="correct">
-                Baby blue
-            </button>
-            <button data-answer="wrong">
-                Green
-            </button>
-        </div>
-        <div
-            id="quizResult"
-            class="game-result">
-        </div>
-    </div>
-    <!-- GAME 5 -->
-    <div class="game">
-        <h3>🌊 Game Five — Find the Otter</h3>
         <p>
-            Somewhere in the ocean is a little
-            otter waiting to wish Lola happy birthday.
+            Happy 27th birthday, my love. 🌸
         </p>
-        <div
-            id="ocean"
-            class="ocean">
-            <div class="wave one"></div>
-            <div class="wave two"></div>
-            <div class="wave three"></div>
-        </div>
-        <div
-            id="otterResult"
-            class="game-result">
-            Find the otter!
-        </div>
-    </div>
-    <!-- GAME 6 -->
-    <div class="game">
-        <h3>🌸 Game Six — Blooming Birthday</h3>
-        <p>
-            Tap every flower to reveal
-            six little reasons you are loved.
-        </p>
-        <div
-            id="flowers"
-            class="flowers">
-        </div>
-        <div
-            id="flowerResult"
-            class="game-result">
-            0 / 6 flowers opened
-        </div>
     </div>
 </section>
-<!-- =====================================================
-     HAPPY BIRTHDAY MUSIC
-===================================================== -->
-<section class="card">
-    <h2>🎵 A Birthday Song For You</h2>
-    <p>
-        No music file needed.
-        <br><br>
-        The Happy Birthday melody is created
-        directly by this website.
-    </p>
-    <button
-        id="musicButton"
-        type="button">
-        🎵 Play Happy Birthday
-    </button>
-    <div
-        id="musicStatus"
-        class="music-status">
+<!-- =========================
+     PROGRESS
+========================= -->
+<section id="games">
+    <div class="card">
+        <h2>
+            Your Birthday Adventure ✨
+        </h2>
+        <p>
+            Six little challenges are waiting for you.
+            Complete them all to unlock your final surprise.
+        </p>
+        <div class="progress-wrap">
+            <div class="progress-text" id="progressText">
+                0 / 6 birthday games completed
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
     </div>
-</section>
-<!-- =====================================================
-     FINAL SURPRISE
-===================================================== -->
-<section class="card">
-    <h2>🎁 One Last Thing...</h2>
-    <p>
-        You have made it through your
-        birthday adventure.
-        <br><br>
-        But there is one final message
-        waiting for you.
-    </p>
-    <button
-        id="secretButton"
-        type="button">
-        💙 Open Your Final Surprise
-    </button>
-    <div
-        id="secret"
-        class="secret">
-        Happy 27th birthday, my love. 💙
-        <br><br>
-        I hope this next chapter of your life
-        brings you softer mornings,
-        beautiful sunsets,
-        peaceful nights,
-        oceans you finally get to see,
-        and countless reasons to smile.
-        <br><br>
-        No matter how enormous this universe is,
-        I am always going to be grateful
-        that somehow our paths crossed.
-        <br><br>
-        You are my favourite little piece
-        of the universe.
-        <br><br>
-        ⭐🌊🌸💙
-    </div>
-</section>
-<!-- =====================================================
-     FINAL
-===================================================== -->
-<section class="final">
-    <div class="final-heart">
-        💙
-    </div>
+<!-- =========================
+     GAME 1
+========================= -->
+<div class="card game" id="game1">
+    <span class="game-number">
+        GAME ONE
+    </span>
     <h2>
-        Happy 27th Birthday, Lola
+        Pick Your Present 🎁
     </h2>
     <p>
-        I love you more than all the stars.
+        Three mysterious presents have appeared.
+        Only one message can be opened from each.
+        Pick whichever one calls to you.
     </p>
-    <p class="signature">
-        With all my love,<br>
-        Bree / Putiputi
+    <div class="present-area">
+        <button class="present" data-message="A little reminder that no matter how far apart we are, you always have a home in my heart. 💙">
+            🎁
+        </button>
+        <button class="present" data-message="If I could wrap up one thing for you, it would be every beautiful sunset you have yet to see. 🌅">
+            🎁
+        </button>
+        <button class="present" data-message="Secret birthday truth: you are one of my favourite people in this entire universe. ⭐">
+            🎁
+        </button>
+    </div>
+    <div class="present-message" id="presentMessage">
+        Choose a present...
+    </div>
+    <div class="game-complete" id="complete1">
+        ✨ Present opened! Game One complete.
+    </div>
+</div>
+<!-- =========================
+     GAME 2
+========================= -->
+<div class="card game" id="game2">
+    <span class="game-number">
+        GAME TWO
+    </span>
+    <h2>
+        Make a Birthday Wish 🎂
+    </h2>
+    <p>
+        Three candles are waiting.
+        Tap each flame to blow it out.
+        When they're all gone, your birthday wish appears.
     </p>
+    <div class="cake">
+        <div class="candle-row">
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+        </div>
+        <div class="cake-top"></div>
+        <div class="cake-bottom"></div>
+    </div>
+    <div class="cake-message" id="cakeMessage">
+        3 candles still glowing ✨
+    </div>
+    <div class="game-complete" id="complete2">
+        🌟 Wish made! Game Two complete.
+    </div>
+</div>
+<!-- =========================
+     GAME 3
+========================= -->
+<div class="card game" id="game3">
+    <span class="game-number">
+        GAME THREE
+    </span>
+    <h2>
+        Catch the Stars ⭐
+    </h2>
+    <p>
+        Five stars are hiding in the evening sky.
+        Tap them before they disappear!
+    </p>
+    <div class="star-score" id="starScore">
+        Stars collected: 0 / 5
+    </div>
+    <div class="star-game" id="starGame"></div>
+    <div class="game-complete" id="complete3">
+        🌟 You caught every star! Game Three complete.
+    </div>
+</div>
+<!-- =========================
+     GAME 4
+========================= -->
+<div class="card game" id="game4">
+    <span class="game-number">
+        GAME FOUR
+    </span>
+    <h2>
+        How Well Do You Know Lola? 💙
+    </h2>
+    <p>
+        Ten questions.
+        No cheating.
+        Let's see how closely you've been paying attention. 👀
+    </p>
+    <div id="quiz">
+        <!-- Q1 -->
+        <div class="quiz-question active">
+            <h3>
+                1. What is Lola's favourite colour?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option" data-correct="true">
+                    Baby blue
+                </button>
+                <button class="quiz-option">
+                    Burgundy
+                </button>
+                <button class="quiz-option">
+                    Bright red
+                </button>
+                <button class="quiz-option">
+                    Emerald green
+                </button>
+            </div>
+        </div>
+        <!-- Q2 -->
+        <div class="quiz-question">
+            <h3>
+                2. Which animal does Lola love?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option">
+                    Penguins
+                </button>
+                <button class="quiz-option" data-correct="true">
+                    Otters
+                </button>
+                <button class="quiz-option">
+                    Dolphins
+                </button>
+                <button class="quiz-option">
+                    Foxes
+                </button>
+            </div>
+        </div>
+        <!-- Q3 -->
+        <div class="quiz-question">
+            <h3>
+                3. What does Lola like to drink?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option">
+                    Hot chocolate
+                </button>
+                <button class="quiz-option">
+                    Green tea
+                </button>
+                <button class="quiz-option" data-correct="true">
+                    Black coffee
+                </button>
+                <button class="quiz-option">
+                    Lemonade
+                </button>
+            </div>
+        </div>
+        <!-- Q4 -->
+        <div class="quiz-question">
+            <h3>
+                4. Which food does Lola love?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option">
+                    Pizza
+                </button>
+                <button class="quiz-option" data-correct="true">
+                    Sushi
+                </button>
+                <button class="quiz-option">
+                    Tacos
+                </button>
+                <button class="quiz-option">
+                    Burgers
+                </button>
+            </div>
+        </div>
+        <!-- Q5 -->
+        <div class="quiz-question">
+            <h3>
+                5. What does Lola want to see someday?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option">
+                    A desert
+                </button>
+                <button class="quiz-option">
+                    A volcano
+                </button>
+                <button class="quiz-option" data-correct="true">
+                    The ocean
+                </button>
+                <button class="quiz-option">
+                    A rainforest
+                </button>
+            </div>
+        </div>
+        <!-- Q6 -->
+        <div class="quiz-question">
+            <h3>
+                6. What is something Lola is known for being like during chaos?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option" data-correct="true">
+                    Calm
+                </button>
+                <button class="quiz-option">
+                    Loud
+                </button>
+                <button class="quiz-option">
+                    Easily distracted
+                </button>
+                <button class="quiz-option">
+                    Dramatic
+                </button>
+            </div>
+        </div>
+        <!-- Q7 -->
+        <div class="quiz-question">
+            <h3>
+                7. What kind of coffee does Lola like?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option">
+                    Sweet iced coffee
+                </button>
+                <button class="quiz-option">
+                    Cappuccino
+                </button>
+                <button class="quiz-option">
+                    Vanilla latte
+                </button>
+                <button class="quiz-option" data-correct="true">
+                    Black coffee
+                </button>
+            </div>
+        </div>
+        <!-- Q8 -->
+        <div class="quiz-question">
+            <h3>
+                8. Which creature appears in Lola's birthday universe?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option">
+                    🐺 Wolf
+                </button>
+                <button class="quiz-option" data-correct="true">
+                    🦦 Otter
+                </button>
+                <button class="quiz-option">
+                    🦊 Fox
+                </button>
+                <button class="quiz-option">
+                    🐼 Panda
+                </button>
+            </div>
+        </div>
+        <!-- Q9 -->
+        <div class="quiz-question">
+            <h3>
+                9. What is Lola turning?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option">
+                    25
+                </button>
+                <button class="quiz-option">
+                    26
+                </button>
+                <button class="quiz-option" data-correct="true">
+                    27
+                </button>
+                <button class="quiz-option">
+                    28
+                </button>
+            </div>
+        </div>
+        <!-- Q10 -->
+        <div class="quiz-question">
+            <h3>
+                10. What colour belongs to Lola's birthday universe?
+            </h3>
+            <div class="quiz-options">
+                <button class="quiz-option">
+                    Neon yellow
+                </button>
+                <button class="quiz-option">
+                    Bright orange
+                </button>
+                <button class="quiz-option" data-correct="true">
+                    Soft baby blue
+                </button>
+                <button class="quiz-option">
+                    Fluorescent green
+                </button>
+            </div>
+        </div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+        <button class="quiz-next" id="quizNext" style="display:none;">
+            Next question →
+        </button>
+        <div class="quiz-score" id="quizScore"></div>
+    </div>
+    <div class="game-complete" id="complete4">
+        💙 You survived the Lola quiz! Game Four complete.
+    </div>
+</div>
+<!-- =========================
+     GAME 5
+========================= -->
+<div class="card game" id="game5">
+    <span class="game-number">
+        GAME FIVE
+    </span>
+    <h2>
+        Find Lola's Otter 🦦
+    </h2>
+    <p>
+        Something is hiding beneath the waves.
+        Tap the ocean until you find it.
+    </p>
+    <div class="ocean" id="ocean">
+        <div class="wave"></div>
+        <div class="wave two"></div>
+        <button class="otter" id="otter">
+            🦦
+        </button>
+    </div>
+    <div class="ocean-message" id="oceanMessage">
+        Where could the little otter be? 🌊
+    </div>
+    <div class="game-complete" id="complete5">
+        🦦 You found the otter! Game Five complete.
+    </div>
+</div>
+<!-- =========================
+     GAME 6
+========================= -->
+<div class="card game" id="game6">
+    <span class="game-number">
+        GAME SIX
+    </span>
+    <h2>
+        Make the Garden Bloom 🌸
+    </h2>
+    <p>
+        Six flowers are waiting to bloom.
+        Tap each one to reveal a little reason
+        why Lola is loved.
+    </p>
+    <div class="flower-garden">
+        <button class="flower" data-reason="Because your presence makes ordinary moments feel special. 💙">
+            🌱
+        </button>
+        <button class="flower" data-reason="Because there is something incredibly comforting about you. 🌸">
+            🌱
+        </button>
+        <button class="flower" data-reason="Because you have a way of making someone feel at home. 🏡">
+            🌱
+        </button>
+        <button class="flower" data-reason="Because your smile deserves its own constellation. ⭐">
+            🌱
+        </button>
+        <button class="flower" data-reason="Because you are one of the most precious parts of my universe. 🌌">
+            🌱
+        </button>
+        <button class="flower" data-reason="Because loving you feels like finding a little piece of peace in a very noisy world. 💙">
+            🌱
+        </button>
+    </div>
+    <div class="flower-text" id="flowerText">
+        Your garden is waiting...
+    </div>
+    <div class="game-complete" id="complete6">
+        🌸 The whole garden is blooming! Game Six complete.
+    </div>
+</div>
+</section>
+<!-- =========================
+     FINAL SURPRISE
+========================= -->
+<section class="final">
+    <h2>
+        You made it. 💙
+    </h2>
+    <p>
+        Six games.
+        Ten Lola questions.
+        One very special birthday girl.
+    </p>
+    <button class="secret-button" id="secretButton">
+        💙 Open Your Final Surprise
+    </button>
+    <div class="card secret-letter" id="secretLetter">
+        <h2>
+            Happy 27th Birthday, my love. 🌅
+        </h2>
+        <p>
+            I hope this next chapter brings you softer mornings,
+            beautiful sunsets,
+            peaceful nights,
+            oceans you finally get to see,
+            and so many little moments that make you smile.
+        </p>
+        <p>
+            I wish I could give you the whole sky,
+            but somehow our paths crossed,
+            and I ended up finding something even more precious.
+        </p>
+        <p>
+            You.
+        </p>
+        <p>
+            So whenever you look at the stars,
+            I hope you remember that somewhere in this enormous universe,
+            there is a girl who loves you more than words can properly explain.
+        </p>
+        <p>
+            You are my favourite little piece of the universe.
+            ⭐🌊🌸💙
+        </p>
+        <p class="signature">
+            With all my love,<br>
+            Bree / Putiputi 💙
+        </p>
+    </div>
 </section>
 </main>
 <script>
-/* =====================================================
-   FLOATING ELEMENTS
-===================================================== */
-const floatingSymbols = [
-    "💙",
-    "✨",
-    "⭐",
-    "🌸",
-    "🦋",
-    "🌊"
-];
-function createFloating() {
-    const element =
-        document.createElement("div");
-    element.className =
-        "floating";
-    element.textContent =
-        floatingSymbols[
-            Math.floor(
-                Math.random() *
-                floatingSymbols.length
-            )
-        ];
-    element.style.left =
-        Math.random() * 100 + "vw";
-    element.style.fontSize =
-        (14 + Math.random() * 16) + "px";
-    element.style.animationDuration =
-        (7 + Math.random() * 6) + "s";
-    document.body.appendChild(element);
-    setTimeout(
-        () => element.remove(),
-        14000
-    );
-}
-setInterval(
-    createFloating,
-    900
-);
-/* =====================================================
-   GAME PROGRESS
-===================================================== */
-const completedGames =
-    new Set();
+/* =========================
+   BASIC STATE
+========================= */
+let completedGames = new Set();
 function completeGame(number) {
+    if (completedGames.has(number)) return;
     completedGames.add(number);
-    const progress =
-        Math.min(
-            completedGames.size / 6 * 100,
-            100
-        );
-    document.getElementById(
-        "progressBar"
-    ).style.width =
-        progress + "%";
-    document.getElementById(
-        "progressText"
-    ).textContent =
-        completedGames.size +
-        " / 6 birthday games completed";
-    if (
-        completedGames.size === 6
-    ) {
-        createConfetti();
-        document.getElementById(
-            "progressText"
-        ).textContent =
-            "🎉 All six games completed! 🎉";
+    const complete = document.getElementById("complete" + number);
+    if (complete) {
+        complete.classList.add("show");
+    }
+    updateProgress();
+    if (completedGames.size === 6) {
+        createConfetti(80);
     }
 }
-/* =====================================================
-   GAME 1 — PRESENTS
-===================================================== */
-document
-    .querySelectorAll(".present")
-    .forEach(
-        present => {
-            present.addEventListener(
-                "click",
-                () => {
-                    document.getElementById(
-                        "presentResult"
-                    ).textContent =
-                        present.dataset.message;
-                    completeGame(1);
-                    createConfetti();
-                }
-            );
-        }
-    );
-/* =====================================================
-   GAME 2 — CANDLES
-===================================================== */
-let candles = 3;
-const cake =
-    document.getElementById("cake");
-function blowCandle() {
-    if (candles <= 0) {
-        return;
-    }
-    candles--;
-    if (candles === 2) {
-        cake.textContent =
-            "🕯️🕯️💨";
-    } else if (candles === 1) {
-        cake.textContent =
-            "🕯️💨💨";
-    } else {
-        cake.textContent =
-            "🎂✨";
-    }
-    document.getElementById(
-        "candleResult"
-    ).textContent =
-        candles > 0
-        ? candles +
-          " candle" +
-          (candles === 1 ? "" : "s") +
-          " still glowing."
-        : "🎉 All the candles are out! Make your birthday wish. 💙";
-    if (candles === 0) {
-        completeGame(2);
-        createConfetti();
-    }
+function updateProgress() {
+    const count = completedGames.size;
+    const percentage = (count / 6) * 100;
+    document.getElementById("progressText").textContent =
+        count + " / 6 birthday games completed";
+    document.getElementById("progressFill").style.width =
+        percentage + "%";
 }
-cake.addEventListener(
-    "click",
-    blowCandle
-);
-cake.addEventListener(
-    "keydown",
-    event => {
-        if (
-            event.key === "Enter" ||
-            event.key === " "
-        ) {
-            event.preventDefault();
-            blowCandle();
-        }
-    }
-);
-/* =====================================================
-   GAME 3 — STARS
-===================================================== */
-const starGame =
-    document.getElementById(
-        "starGame"
-    );
-let starsCollected = 0;
-for (
-    let i = 0;
-    i < 5;
-    i++
-) {
-    const star =
-        document.createElement("button");
-    star.type = "button";
-    star.className =
-        "game-star";
-    star.textContent =
-        "⭐";
-    star.setAttribute(
-        "aria-label",
-        "Collect star " + (i + 1)
-    );
-    star.addEventListener(
-        "click",
-        () => {
-            if (
-                star.classList.contains(
-                    "collected"
-                )
-            ) {
-                return;
-            }
-            star.classList.add(
-                "collected"
-            );
-            starsCollected++;
-            document.getElementById(
-                "starResult"
-            ).textContent =
-                starsCollected +
-                " / 5 stars collected";
-            if (
-                starsCollected === 5
-            ) {
-                document.getElementById(
-                    "starResult"
-                ).textContent =
-                    "🌟 Wish granted. May 27 bring you beautiful things. 💙";
-                completeGame(3);
-                createConfetti();
-            }
-        }
-    );
-    starGame.appendChild(
-        star
-    );
-}
-/* =====================================================
-   GAME 4 — QUIZ
-===================================================== */
-document
-    .querySelectorAll(
-        "#quizOptions button"
-    )
-    .forEach(
-        option => {
-            option.addEventListener(
-                "click",
-                () => {
-                    const result =
-                        document.getElementById(
-                            "quizResult"
-                        );
-                    if (
-                        option.dataset.answer ===
-                        "correct"
-                    ) {
-                        result.textContent =
-                            "💙 Correct! You know Lola very well.";
-                        completeGame(4);
-                        createConfetti();
-                    } else {
-                        result.textContent =
-                            "Not that one 😂 Try again!";
-                    }
-                }
-            );
-        }
-    );
-/* =====================================================
-   GAME 5 — OTTER
-===================================================== */
-const ocean =
-    document.getElementById(
-        "ocean"
-    );
-const otter =
-    document.createElement(
-        "div"
-    );
-otter.className =
-    "otter";
-otter.textContent =
-    "🦦";
-otter.style.left =
-    "72%";
-otter.style.top =
-    "48%";
-ocean.appendChild(
-    otter
-);
-otter.addEventListener(
-    "click",
-    () => {
-        document.getElementById(
-            "otterResult"
-        ).textContent =
-            "🦦 You found the birthday otter! It says: Happy birthday Lola! 💙";
-        completeGame(5);
-        createConfetti();
-    }
-);
-/* =====================================================
-   GAME 6 — PEONIES
-===================================================== */
-const flowerMessages = [
-    "Because your smile makes ordinary days feel special. 🌸",
-    "Because your heart is softer than you realise. 💙",
-    "Because you make the world feel a little warmer. 🌷",
-    "Because you are uniquely you. ✨",
-    "Because you deserve to be celebrated today. 🌸",
-    "Because you are loved more than words can explain. 💙"
-];
-const flowers =
-    document.getElementById(
-        "flowers"
-    );
-let flowersOpened = 0;
-flowerMessages.forEach(
-    (message, index) => {
-        const flower =
-            document.createElement(
-                "button"
-            );
-        flower.type = "button";
-        flower.className =
-            "flower";
-        flower.textContent =
-            "🌸";
-        flower.addEventListener(
-            "click",
-            () => {
-                if (
-                    flower.classList.contains(
-                        "open"
-                    )
-                ) {
-                    return;
-                }
-                flower.classList.add(
-                    "open"
-                );
-                flower.textContent =
-                    message;
-                flowersOpened++;
-                document.getElementById(
-                    "flowerResult"
-                ).textContent =
-                    flowersOpened +
-                    " / 6 flowers opened";
-                if (
-                    flowersOpened === 6
-                ) {
-                    document.getElementById(
-                        "flowerResult"
-                    ).textContent =
-                        "🌸 The whole garden has bloomed for Lola. 💙";
-                    completeGame(6);
-                    createConfetti();
-                }
-            }
-        );
-        flowers.appendChild(
-            flower
-        );
-    }
-);
-/* =====================================================
-   HAPPY BIRTHDAY MUSIC
-===================================================== */
+/* =========================
+   HAPPY BIRTHDAY AUDIO
+========================= */
 let audioContext = null;
-const frequencies = {
+let musicPlaying = false;
+const notes = {
     G4: 392.00,
     A4: 440.00,
     B4: 493.88,
@@ -1267,7 +1179,7 @@ const frequencies = {
     F5: 698.46,
     G5: 783.99
 };
-const birthdayNotes = [
+const melody = [
     ["G4", .28],
     ["G4", .28],
     ["A4", .55],
@@ -1294,114 +1206,340 @@ const birthdayNotes = [
     ["D5", .55],
     ["C5", 1.1]
 ];
-function playHappyBirthday() {
-    audioContext =
-        new (
+function playNote(frequency, startTime, duration) {
+    if (!audioContext) return;
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    oscillator.type = "sine";
+    oscillator.frequency.value = frequency;
+    gain.gain.setValueAtTime(0.0001, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.13, startTime + 0.025);
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        startTime + duration
+    );
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start(startTime);
+    oscillator.stop(startTime + duration + .03);
+}
+function playBirthdaySong() {
+    if (!audioContext) {
+        audioContext = new (
             window.AudioContext ||
             window.webkitAudioContext
         )();
-    let time =
-        audioContext.currentTime;
-    birthdayNotes.forEach(
-        ([note, duration]) => {
-            const oscillator =
-                audioContext.createOscillator();
-            const gain =
-                audioContext.createGain();
-            oscillator.type =
-                "sine";
-            oscillator.frequency.value =
-                frequencies[note];
-            gain.gain.setValueAtTime(
-                .0001,
-                time
-            );
-            gain.gain.exponentialRampToValueAtTime(
-                .22,
-                time + .025
-            );
-            gain.gain.exponentialRampToValueAtTime(
-                .0001,
-                time + duration - .03
-            );
-            oscillator.connect(gain);
-            gain.connect(
-                audioContext.destination
-            );
-            oscillator.start(
-                time
-            );
-            oscillator.stop(
-                time + duration
-            );
-            time += duration;
-        }
-    );
-    document.getElementById(
-        "musicStatus"
-    ).textContent =
-        "🎶 Happy Birthday is playing...";
-    setTimeout(
-        () => {
-            document.getElementById(
-                "musicStatus"
-            ).textContent =
-                "💙 Happy birthday, Lola.";
-        },
-        10000
-    );
+    }
+    if (audioContext.state === "suspended") {
+        audioContext.resume();
+    }
+    const now = audioContext.currentTime + .1;
+    let time = now;
+    melody.forEach(([note, duration]) => {
+        playNote(
+            notes[note],
+            time,
+            duration * .9
+        );
+        time += duration;
+    });
+    musicPlaying = true;
+    document.getElementById("musicButton").textContent =
+        "🎵 Happy Birthday is playing!";
+    setTimeout(() => {
+        musicPlaying = false;
+        document.getElementById("musicButton").textContent =
+            "🎵 Play Happy Birthday Again";
+    }, (time - now) * 1000 + 300);
 }
-document
-    .getElementById(
-        "musicButton"
-    )
-    .addEventListener(
-        "click",
-        playHappyBirthday
-    );
-/* =====================================================
-   SECRET
-===================================================== */
-document
-    .getElementById(
-        "secretButton"
-    )
-    .addEventListener(
-        "click",
-        () => {
-            document
-                .getElementById(
-                    "secret"
-                )
-                .classList.add(
-                    "show"
-                );
-            createConfetti();
+document.getElementById("musicButton").addEventListener(
+    "click",
+    playBirthdaySong
+);
+/* =========================
+   BEGIN BUTTON
+   ALSO STARTS MUSIC
+========================= */
+document.getElementById("beginButton").addEventListener(
+    "click",
+    () => {
+        if (!musicPlaying) {
+            playBirthdaySong();
         }
-    );
-/* =====================================================
+        document.getElementById("games").scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+);
+/* =========================
+   GAME 1: PRESENTS
+========================= */
+const presents = document.querySelectorAll(".present");
+const presentMessage = document.getElementById("presentMessage");
+presents.forEach(present => {
+    present.addEventListener("click", () => {
+        presents.forEach(item => {
+            item.classList.remove("opened");
+        });
+        present.classList.add("opened");
+        presentMessage.textContent =
+            present.dataset.message;
+        completeGame(1);
+        createConfetti(15);
+    });
+});
+/* =========================
+   GAME 2: CANDLES
+========================= */
+const flames = document.querySelectorAll(".flame");
+const cakeMessage = document.getElementById("cakeMessage");
+flames.forEach(flame => {
+    flame.addEventListener("click", () => {
+        if (flame.classList.contains("out")) return;
+        flame.classList.add("out");
+        const remaining =
+            document.querySelectorAll(".flame:not(.out)").length;
+        if (remaining > 0) {
+            cakeMessage.textContent =
+                remaining + " candle" +
+                (remaining === 1 ? "" : "s") +
+                " still glowing ✨";
+        } else {
+            cakeMessage.textContent =
+                "Make your biggest birthday wish... 🌟";
+            completeGame(2);
+            createConfetti(30);
+        }
+    });
+});
+/* =========================
+   GAME 3: CATCH STARS
+========================= */
+const starGame = document.getElementById("starGame");
+const starScore = document.getElementById("starScore");
+let starsCollected = 0;
+function createStar() {
+    const star = document.createElement("button");
+    star.className = "catch-star";
+    star.type = "button";
+    star.textContent = "⭐";
+    star.setAttribute("aria-label", "Catch star");
+    const maxX = Math.max(10, starGame.clientWidth - 55);
+    const maxY = Math.max(10, starGame.clientHeight - 60);
+    star.style.left =
+        Math.random() * maxX + "px";
+    star.style.top =
+        Math.random() * maxY + "px";
+    star.addEventListener("click", () => {
+        if (star.dataset.caught) return;
+        star.dataset.caught = "true";
+        starsCollected++;
+        star.remove();
+        starScore.textContent =
+            "Stars collected: " +
+            starsCollected +
+            " / 5";
+        createConfetti(5);
+        if (starsCollected >= 5) {
+            completeGame(3);
+            starScore.textContent =
+                "✨ All five stars collected! ✨";
+        }
+    });
+    starGame.appendChild(star);
+}
+for (let i = 0; i < 5; i++) {
+    createStar();
+}
+/* =========================
+   GAME 4: QUIZ
+========================= */
+const quizQuestions =
+    document.querySelectorAll(".quiz-question");
+const quizFeedback =
+    document.getElementById("quizFeedback");
+const quizNext =
+    document.getElementById("quizNext");
+const quizScore =
+    document.getElementById("quizScore");
+let currentQuestion = 0;
+let quizPoints = 0;
+let answeredCurrent = false;
+quizQuestions.forEach((question, questionIndex) => {
+    const options =
+        question.querySelectorAll(".quiz-option");
+    options.forEach(option => {
+        option.addEventListener("click", () => {
+            if (answeredCurrent) return;
+            answeredCurrent = true;
+            const isCorrect =
+                option.dataset.correct === "true";
+            options.forEach(item => {
+                item.disabled = true;
+                if (item.dataset.correct === "true") {
+                    item.classList.add("correct");
+                }
+            });
+            if (isCorrect) {
+                quizPoints++;
+                option.classList.add("correct");
+                quizFeedback.textContent =
+                    "You got it! 💙";
+                createConfetti(7);
+            } else {
+                option.classList.add("wrong");
+                quizFeedback.textContent =
+                    "Not quite! The correct answer is highlighted above. 🌸";
+            }
+            if (questionIndex < quizQuestions.length - 1) {
+                quizNext.style.display = "inline-block";
+            } else {
+                quizScore.textContent =
+                    "You scored " +
+                    quizPoints +
+                    " / 10 💙";
+                completeGame(4);
+                createConfetti(25);
+            }
+        });
+    });
+});
+quizNext.addEventListener("click", () => {
+    quizQuestions[currentQuestion]
+        .classList.remove("active");
+    currentQuestion++;
+    quizQuestions[currentQuestion]
+        .classList.add("active");
+    quizFeedback.textContent = "";
+    quizNext.style.display = "none";
+    answeredCurrent = false;
+});
+/* =========================
+   GAME 5: OTTER
+========================= */
+const ocean = document.getElementById("ocean");
+const otter = document.getElementById("otter");
+const oceanMessage = document.getElementById("oceanMessage");
+function moveOtter() {
+    const maxX =
+        Math.max(20, ocean.clientWidth - 65);
+    const maxY =
+        Math.max(20, ocean.clientHeight - 75);
+    otter.style.left =
+        Math.random() * maxX + "px";
+    otter.style.top =
+        Math.random() * maxY + "px";
+}
+moveOtter();
+otter.addEventListener("click", () => {
+    oceanMessage.textContent =
+        "You found Lola's little ocean friend! 🦦💙";
+    completeGame(5);
+    createConfetti(18);
+});
+/* =========================
+   GAME 6: FLOWERS
+========================= */
+const flowers =
+    document.querySelectorAll(".flower");
+const flowerText =
+    document.getElementById("flowerText");
+let flowersOpened = 0;
+flowers.forEach(flower => {
+    flower.addEventListener("click", () => {
+        if (flower.dataset.opened) return;
+        flower.dataset.opened = "true";
+        flowersOpened++;
+        flower.textContent = "🌸";
+        flowerText.textContent =
+            flower.dataset.reason;
+        flower.style.transform =
+            "scale(1.08)";
+        createConfetti(4);
+        if (flowersOpened >= flowers.length) {
+            completeGame(6);
+            flowerText.textContent =
+                "🌸 The whole garden is blooming because of you. 💙";
+            createConfetti(30);
+        }
+    });
+});
+/* =========================
+   FINAL SURPRISE
+========================= */
+const secretButton =
+    document.getElementById("secretButton");
+const secretLetter =
+    document.getElementById("secretLetter");
+secretButton.addEventListener("click", () => {
+    if (completedGames.size < 6) {
+        secretButton.textContent =
+            "✨ Complete all six games first!";
+        setTimeout(() => {
+            secretButton.textContent =
+                "💙 Open Your Final Surprise";
+        }, 2500);
+        return;
+    }
+    secretLetter.classList.add("show");
+    secretButton.textContent =
+        "🌸 Your surprise is open";
+    createConfetti(70);
+    secretLetter.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+});
+/* =========================
+   FLOATING DECORATIONS
+========================= */
+const floatingSymbols = [
+    "💙",
+    "✨",
+    "⭐",
+    "🌸",
+    "🦋",
+    "🌊"
+];
+function createFloatingSymbol() {
+    const element =
+        document.createElement("div");
+    element.className = "floating";
+    element.textContent =
+        floatingSymbols[
+            Math.floor(
+                Math.random() *
+                floatingSymbols.length
+            )
+        ];
+    element.style.left =
+        Math.random() * 100 + "%";
+    element.style.fontSize =
+        (12 + Math.random() * 15) + "px";
+    element.style.animationDuration =
+        (8 + Math.random() * 8) + "s";
+    document.body.appendChild(element);
+    setTimeout(() => {
+        element.remove();
+    }, 17000);
+}
+setInterval(createFloatingSymbol, 1300);
+/* =========================
    CONFETTI
-===================================================== */
-function createConfetti() {
+========================= */
+function createConfetti(amount) {
     const symbols = [
         "💙",
         "✨",
         "⭐",
         "🌸",
-        "🎉",
-        "💫"
+        "🦋",
+        "🌊"
     ];
-    for (
-        let i = 0;
-        i < 45;
-        i++
-    ) {
+    for (let i = 0; i < amount; i++) {
         const piece =
-            document.createElement(
-                "div"
-            );
-        piece.className =
-            "confetti";
+            document.createElement("div");
+        piece.className = "confetti";
         piece.textContent =
             symbols[
                 Math.floor(
@@ -1410,41 +1548,19 @@ function createConfetti() {
                 )
             ];
         piece.style.left =
-            Math.random() * 100 + "vw";
+            Math.random() * 100 + "%";
         piece.style.fontSize =
-            (10 +
-            Math.random() * 17) +
-            "px";
+            (12 + Math.random() * 18) + "px";
         piece.style.animationDuration =
-            (2.5 +
-            Math.random() * 2.5) +
-            "s";
+            (2.5 + Math.random() * 2.5) + "s";
         piece.style.animationDelay =
-            Math.random() * .7 +
-            "s";
-        document.body.appendChild(
-            piece
-        );
-        setTimeout(
-            () => piece.remove(),
-            5500
-        );
+            Math.random() * .7 + "s";
+        document.body.appendChild(piece);
+        setTimeout(() => {
+            piece.remove();
+        }, 6000);
     }
 }
-/* =====================================================
-   INITIAL LITTLE CELEBRATION
-===================================================== */
-window.addEventListener(
-    "load",
-    () => {
-        setTimeout(
-            () => {
-                createConfetti();
-            },
-            1200
-        );
-    }
-);
 </script>
 </body>
 </html>
